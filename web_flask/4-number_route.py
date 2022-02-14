@@ -30,7 +30,6 @@ def disp_python(text='is cool'):
     return 'Python {}'.format(text.replace('_', ' '))
 
 
-@app.route('/number/', strict_slashes=False)
 @app.route('/number/<int:n>', strict_slashes=False)
 def number(n):
     return '{} is a number'.format(n)
