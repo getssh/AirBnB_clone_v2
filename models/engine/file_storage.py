@@ -67,3 +67,6 @@ class FileStorage:
         obj_key = obj.to_dict()['__class__'] + '.' + obj.id
         if obj_key in self.__objects.keys():
             del self.__objects[obj_key]
+    def close(self):
+        '''calling reload method to desteralize json objects'''
+        self.reload()
