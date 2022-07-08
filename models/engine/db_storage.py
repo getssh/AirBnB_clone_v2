@@ -63,6 +63,8 @@ class DBStorage:
         if obj is not None:
             try:
                 self.__session.add(obj)
+                self.__session.flush()
+                self.__session.refresh(obj)
             except Exception as ex:
                 self.__session.rollback()
                 raise ex
@@ -84,7 +86,8 @@ class DBStorage:
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
                                        expire_on_commit=False)
-        self.__session = scoped_session(session_factory)()
+        self.__session = scoped_session(session_factory)
+
     def close(self):
         '''closing current session'''
         self.__session.remove()
